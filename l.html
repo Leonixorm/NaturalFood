@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natural Food - Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5ff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-container {
+            background-color: #fff;
+            border: 2px solid #d8b0ff;
+            border-radius: 10px;
+            padding: 20px 30px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .login-container h1 {
+            color: #9b59b6;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #d8b0ff;
+            border-radius: 5px;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #9b59b6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .login-container button:hover {
+            background-color: #7e479a;
+        }
+        .hidden {
+            display: none;
+        }
+        .variety-list {
+            margin: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            text-align: left;
+        }
+        .variety-list h2 {
+            color: #9b59b6;
+        }
+        .variety-list button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #d8b0ff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 16px;
+        }
+        .variety-list button:hover {
+            background-color: #b28cd9;
+        }
+        .description-container {
+            margin: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+        }
+        .description-container img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container" id="login-screen">
+        <h1>Natural Food</h1>
+        <input type="text" id="username" placeholder="Usuario">
+        <input type="password" id="password" placeholder="Contraseña">
+        <button onclick="login()">Ingresar</button>
+        <p id="error-message" style="color: red; display: none;">Usuario o contraseña incorrectos</p>
+    </div>
+
+    <div id="main-screen" class="hidden">
+        <div class="variety-list">
+            <h2>Tipos de Pasas de Uva</h2>
+            <button onclick="showDescription('sultana')">Pasa Sultana</button>
+            <button onclick="showDescription('negra')">Pasa Negra</button>
+            <button onclick="showDescription('flame')">Pasa Flame</button>
+            <button onclick="showDescription('moscatel')">Pasa Moscatel</button>
+            <button onclick="showDescription('zante')">Pasa Zante</button>
+        </div>
+    </div>
+
+    <div id="description-screen" class="hidden">
+        <div class="description-container">
+            <img id="description-image" src="" alt="Imagen descriptiva">
+            <h2 id="description-title"></h2>
+            <p id="description-text"></p>
+            <h3>Parámetros óptimos para consumo:</h3>
+            <ul id="description-parameters"></ul>
+            <button onclick="goBack()">Volver</button>
+        </div>
+    </div>
+
+    <script>
+        const descriptions = {
+            sultana: {
+                title: "Pasa Sultana",
+                text: "De color dorado, sabor dulce y textura tierna.",
+                image: "https://upload.wikimedia.org/wikipedia/commons/a/a1/Sultana_raisins.jpg",
+                parameters: ["Color uniforme", "Sin tallos ni residuos", "Textura suave"]
+            },
+            negra: {
+                title: "Pasa Negra",
+                text: "Más oscura, con sabor profundo y rica en nutrientes.",
+                image: "https://upload.wikimedia.org/wikipedia/commons/3/35/Black_raisins.jpg",
+                parameters: ["Color oscuro intenso", "Libre de insectos", "Humedad moderada"]
+            },
+            flame: {
+                title: "Pasa Flame",
+                text: "Color rojizo, más grande y con un toque ácido.",
+                image: "https://upload.wikimedia.org/wikipedia/commons/d/d4/Flame_raisins.jpg",
+                parameters: ["Tamaño uniforme", "Sabor fresco", "Sin olores extraños"]
+            },
+            moscatel: {
+                title: "Pasa Moscatel",
+                text: "Aromática y dulce, ideal para postres.",
+                image: "https://upload.wikimedia.org/wikipedia/commons/6/6d/Muscat_raisins.jpg",
+                parameters: ["Aroma dulce", "Color claro", "Buena elasticidad"]
+            },
+            zante: {
+                title: "Pasa Zante",
+                text: "Pequeña, jugosa y de sabor intenso.",
+                image: "https://upload.wikimedia.org/wikipedia/commons/8/8f/Zante_currants.jpg",
+                parameters: ["Tamaño pequeño", "Sabor fuerte", "Consistencia firme"]
+            }
+        };
+
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === 'admin' && password === 'admin') {
+                document.getElementById('login-screen').classList.add('hidden');
+                document.getElementById('main-screen').classList.remove('hidden');
+            } else {
+                document.getElementById('error-message').style.display = 'block';
+            }
+        }
+
+        function showDescription(type) {
+            const desc = descriptions[type];
+            document.getElementById('main-screen').classList.add('hidden');
+            document.getElementById('description-screen').classList.remove('hidden');
+            document.getElementById('description-image').src = desc.image;
+            document.getElementById('description-title').textContent = desc.title;
+            document.getElementById('description-text').textContent = desc.text;
+
+            const paramList = document.getElementById('description-parameters');
+            paramList.innerHTML = '';
+            desc.parameters.forEach(param => {
+                const li = document.createElement('li');
+                li.textContent = param;
+                paramList.appendChild(li);
+            });
+        }
+
+        function goBack() {
+            document.getElementById('description-screen').classList.add('hidden');
+            document.getElementById('main-screen').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
