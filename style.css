@@ -4,7 +4,7 @@ body {
     text-align: center;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0; /* Fondo gris claro para contraste */
+    background-color: #f0f0f0;
     color: #333;
 }
 
@@ -30,6 +30,17 @@ button:hover {
     background-color: #BA55D3; /* Lila */
 }
 
+/* Animaciones */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
 /* Estilos específicos para index.html */
 #login-form {
     margin-top: 50px;
@@ -38,6 +49,7 @@ button:hover {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: inline-block;
+    animation: fadeIn 1s;
 }
 
 input {
@@ -50,6 +62,10 @@ input {
 
 .hidden {
     display: none;
+}
+
+#welcome-message {
+    animation: slideIn 0.5s;
 }
 
 #welcome-message h2 {
