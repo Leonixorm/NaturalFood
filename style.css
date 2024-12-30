@@ -4,11 +4,12 @@ body {
     text-align: center;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
+    background-color: #f0f0f0; /* Fondo gris claro para contraste */
+    color: #333;
 }
 
 h1 {
-    background-color: #4CAF50;
+    background-color: #6A0DAD; /* Morado oscuro */
     color: white;
     padding: 20px;
     margin: 0;
@@ -18,7 +19,7 @@ button {
     padding: 20px;
     margin: 20px;
     cursor: pointer;
-    background-color: #4CAF50;
+    background-color: #9370DB; /* Violeta claro */
     color: white;
     border: none;
     border-radius: 5px;
@@ -26,12 +27,17 @@ button {
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #BA55D3; /* Lila */
 }
 
 /* Estilos específicos para index.html */
 #login-form {
     margin-top: 50px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: inline-block;
 }
 
 input {
@@ -47,10 +53,15 @@ input {
 }
 
 #welcome-message h2 {
-    color: #4CAF50;
+    color: #9370DB; /* Violeta claro */
 }
 
 /* Estilos específicos para home.html y finca.html */
 .page-container {
     margin-top: 50px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: inline-block;
 }
