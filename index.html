@@ -1,66 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Natural Food - Login</title>
-    <link rel="stylesheet" href="natural_food_styles.css">
+    <title>Natural Food - Iniciar Sesión</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    <div class="login-container" id="login-screen">
-        <h1>Natural Food</h1>
-        <input type="text" id="username" placeholder="Usuario">
-        <input type="password" id="password" placeholder="Contraseña">
-        <button onclick="login()">Ingresar</button>
-        <p id="error-message" style="color: red; display: none;">Usuario o contraseña incorrectos</p>
+    <h1>Natural Food</h1>
+    <div id="login-form">
+        <input type="text" id="username" placeholder="Usuario" /><br/>
+        <input type="password" id="password" placeholder="Clave" /><br/>
+        <button onclick="login()">Iniciar Sesión</button>
     </div>
-
-    <div id="main-screen" class="hidden">
-        <div class="variety-list">
-            <button onclick="navigateTo('planta')">Planta</button>
-            <button onclick="navigateTo('finca')">Finca</button>
-            <button onclick="navigateTo('comercial')">Comercial</button>
-        </div>
+    <div id="welcome-message" class="hidden">
+        <h2>Bienvenido, <span id="user-name"></span></h2>
     </div>
-
-    <div id="finca-screen" class="hidden">
-        <h2>Registros de temperaturas</h2>
-        <iframe title="Clima 2" width="600" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiZDcxYWQ3OTQtNTM5Zi00OTVjLTk1YTgtOWY4YzU4ZGJmYjQxIiwidCI6ImNmMDc4MjNiLTc3NjAtNGYwZS05OTA0LWZjYmZhOTViZGE4NSJ9" frameborder="0" allowFullScreen="true"></iframe>
-        <button onclick="goBack()">Volver</button>
-    </div>
-
     <script>
-        const validUsers = [
-            { username: 'admin', password: 'admin' },
-            { username: 'Leandro', password: '071291' },
-            { username: 'Jose', password: 'jose1234' }
-        ];
-
         function login() {
+            const users = {
+                'admin': 'admin',
+                'Leandro': '071291',
+                'Jose': 'jose1234'
+            };
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-
-            const isValid = validUsers.some(user => user.username === username && user.password === password);
-
-            if (isValid) {
-                document.getElementById('login-screen').classList.add('hidden');
-                document.getElementById('main-screen').classList.remove('hidden');
+            if (users[username] && users[username] === password) {
+                document.getElementById('login-form').classList.add('hidden');
+                document.getElementById('welcome-message').classList.remove('hidden');
+                document.getElementById('user-name').innerText = username;
+                setTimeout(() => { window.location.href = 'home.html'; }, 2000);
             } else {
-                document.getElementById('error-message').style.display = 'block';
+                alert('Usuario o clave incorrecta');
             }
-        }
-
-        function navigateTo(section) {
-            document.getElementById('main-screen').classList.add('hidden');
-
-            if (section === 'finca') {
-                document.getElementById('finca-screen').classList.remove('hidden');
-            }
-        }
-
-        function goBack() {
-            document.getElementById('finca-screen').classList.add('hidden');
-            document.getElementById('main-screen').classList.remove('hidden');
         }
     </script>
 </body>
